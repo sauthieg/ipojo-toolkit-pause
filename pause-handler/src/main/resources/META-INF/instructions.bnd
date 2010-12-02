@@ -1,0 +1,1 @@
+Export-Package org.ow2.ipojo.toolkit.pause;version=${pause-handler.version}
