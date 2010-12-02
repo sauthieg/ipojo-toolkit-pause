@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <modules>
+    <module>pause-handler</module>
+  </modules>
+
+  <parent>
+    <groupId>org.ow2.ipojo</groupId>
+    <artifactId>ipojo-toolkit-parent</artifactId>
+    <version>1.0</version>
+  </parent>
+
+  <groupId>org.ow2.ipojo.toolkit</groupId>
+  <artifactId>ipojo-toolkit-pause</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>
+    <ipojo.version>1.6.2</ipojo.version>
+    <maven-ipojo-plugin.version>1.6.0</maven-ipojo-plugin.version>
+    <ipojo-annotations.version>1.6.2</ipojo-annotations.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.ipojo</artifactId>
+        <version>${ipojo.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.apache.felix.ipojo.annotations</artifactId>
+        <version>${ipojo-annotations.version}</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>${maven-bundle-plugin.version}</version>
+          <extensions>true</extensions>
+          <goals>
+            <goal>bundle</goal>
+          </goals>
+          <configuration>
+            <instructions>
+              <_include>-target/classes/META-INF/instructions.bnd</_include>
+            </instructions>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-ipojo-plugin</artifactId>
+          <version>${maven-ipojo-plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>ipojo-bundle</goal>
+              </goals>
+              <configuration>
+                <metadata>src/main/resources/META-INF/metadata.xml</metadata>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+    
+</project>
